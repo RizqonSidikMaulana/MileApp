@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PackageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('/package')->group(function () {
+    Route::get('/', [PackageController::class, 'list']);
+    Route::get('/{id}', [PackageController::class, 'show']);
+    Route::delete('/{id}', [PackageController::class, 'destroy']);
+    Route::post('/', [PackageController::class, 'create']);
+    Route::put('/{id}', [PackageController::class, 'update']);
+    Route::patch('/{id}', [PackageController::class, 'update']);
+});
+
